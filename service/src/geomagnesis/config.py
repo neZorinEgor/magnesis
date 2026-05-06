@@ -39,6 +39,7 @@ class _PostgreSQLConfig(BaseModel):
 class Settings(BaseSettings):
     BASE_DIR: Path = Path(__name__).resolve().parent
     STATIC_PATH: Path = BASE_DIR / "src" / "geomagnesis" / "presentations" / "http_api" / "static"
+    TEMPLATES_DIR: Path = BASE_DIR / "src" / "geomagnesis" / "presentations" / "http_api" / "templates"
 
     model_config = SettingsConfigDict(
         env_prefix="GEOMAGNESIS__",

@@ -12,6 +12,7 @@ from src.geomagnesis.presentations.http_api.routers.healthcheck import (
 )
 from src.geomagnesis.presentations.http_api.routers.metrics import router as metrics_router
 from src.geomagnesis.presentations.http_api.routers.swagger import router as swagger_router
+from src.geomagnesis.presentations.http_api.routers.frontend import router as frontend_router
 
 
 def make_asgi() -> FastAPI:
@@ -27,6 +28,7 @@ def make_asgi() -> FastAPI:
         app.include_router(swagger_router)
     app.include_router(metrics_router)
     app.include_router(healthcheck_router)
+    app.include_router(frontend_router)
     app.add_middleware(PrometheusMetricsMiddleware, app_name=settings.swagger_ui.TITLE.lower())
     app.add_middleware(
         CORSMiddleware,
