@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request
-from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 
 from src.geomagnesis.config import settings
 
@@ -10,7 +10,4 @@ templates = Jinja2Templates(directory=settings.TEMPLATES_DIR)
 
 @router.get("/")
 def home_page(request: Request) -> HTMLResponse:
-    return templates.TemplateResponse(
-        request=request,
-        name="index.html"
-    )
+    return templates.TemplateResponse(request=request, name="index.html")

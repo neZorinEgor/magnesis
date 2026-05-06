@@ -8,6 +8,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class _AppConfig(BaseModel):
     ENV: Literal["dev", "prod"]
 
+
 class _SwaggerUIConfig(BaseModel):
     TITLE: str
     SUMMARY: str
@@ -38,8 +39,12 @@ class _PostgreSQLConfig(BaseModel):
 
 class Settings(BaseSettings):
     BASE_DIR: Path = Path(__name__).resolve().parent
-    STATIC_PATH: Path = BASE_DIR / "src" / "geomagnesis" / "presentations" / "http_api" / "static"
-    TEMPLATES_DIR: Path = BASE_DIR / "src" / "geomagnesis" / "presentations" / "http_api" / "templates"
+    STATIC_PATH: Path = (
+        BASE_DIR / "src" / "geomagnesis" / "presentations" / "http_api" / "static"
+    )
+    TEMPLATES_DIR: Path = (
+        BASE_DIR / "src" / "geomagnesis" / "presentations" / "http_api" / "templates"
+    )
 
     model_config = SettingsConfigDict(
         env_prefix="GEOMAGNESIS__",
@@ -58,7 +63,7 @@ class Settings(BaseSettings):
         return f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
 
     @property
-    def swagger_ui_kwargs(self) -> dict[str: str]:
+    def swagger_ui_kwargs(self) -> dict[str:str]:
         return {
             "title": self.swagger_ui.TITLE,
             "summary": self.swagger_ui.SUMMARY,

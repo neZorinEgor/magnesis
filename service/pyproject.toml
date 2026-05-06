@@ -25,3 +25,8 @@ dependencies = [
 [build-system]
 requires = ["setuptools (>=82.0.1,<83.0.0)"]
 build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "isort>=8.0.1",
+]
