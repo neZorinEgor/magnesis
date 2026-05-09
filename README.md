@@ -1,12 +1,14 @@
-<!-- # Forecasting-of-earth-s-geomagnetic-activity
+# Forecasting-of-earth-s-geomagnetic-activity
 > 🌎 Прогнозирование геомагнитной активности земли
 * [Данные](https://spdf.gsfc.nasa.gov/pub/data/omni/)
 * [Описание датасета](data/dataset_doc.txt)
 
 ```
-'Dst' (колонка 41) — индекс кольцевого тока (магнитные бури)
-'AE' (колонка 42) — индекс авроральной активности
+'Dst' — индекс кольцевого тока (магнитные бури)
+'AE' — индекс авроральной активности
 ```
 ![text](asserts/dst.png)
-![ae](asserts/ae.png) -->
-<a href="https://manytools.org/hacker-tools/ascii-banner/"></a>
+![ae](asserts/ae.png)
+![alt text](asserts/baseline_model.png)
+
+TODO docs
