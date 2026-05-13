@@ -1,5 +1,5 @@
 # Forecasting-of-earth-s-geomagnetic-activity
-> 🌎 Прогнозирование геомагнитной активности земли
+> 🌎 Прогнозирование магнитной активности земли
 * [Данные](https://spdf.gsfc.nasa.gov/pub/data/omni/)
 * [Описание датасета](data/dataset_doc.txt)
 
