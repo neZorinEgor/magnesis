@@ -9,6 +9,6 @@
 ```
 ![text](asserts/dst.png)
 ![ae](asserts/ae.png)
-![alt text](asserts/baseline_model.png)
+![alt text](asserts/image.png)
 
 TODO docs
