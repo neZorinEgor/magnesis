@@ -7,8 +7,6 @@
 'Dst' — индекс кольцевого тока (магнитные бури)
 'AE' — индекс авроральной активности
 ```
-![text](asserts/dst.png)
-![ae](asserts/ae.png)
 ![alt text](asserts/image.png)
 
 TODO docs
