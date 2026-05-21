@@ -18,8 +18,10 @@ deviceType: TypeAlias = Literal["cuda", "cpu"]
 
 
 class GeomagneticNet:
-    def __init__(self, model_dir: Path, device: deviceType) -> None:
+    def __init__(self, model_dir: Path | str, device: deviceType) -> None:
         self.__data_validator = GNDataValidatorImpl()
+        if isinstance(model_dir, str):
+            model_dir = Path(model_dir)
         self.__X_scaler_path = model_dir / "GN_X_scaler.joblib"
         self.__y_scaler_path = model_dir / "GN_y_scaler.joblib"
         self.__model_weights_path = model_dir / "GN_best.pt"
