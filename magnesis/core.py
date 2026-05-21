@@ -13,6 +13,7 @@ from .model import GeomagneticModelV1
 from .validator import GNDataValidatorImpl
 from .dataset import GeomagneticDataset
 from .constants import FILL_VALIES
+from .schemas import GeomagnesisResult
 
 deviceType: TypeAlias = Literal["cuda", "cpu"]
 
@@ -164,3 +165,5 @@ class GeomagneticNet:
         self.__data_validator.validate(geomagnetic_df)
         dataloader = self.__preprocessing(geomagnetic_df, batch_size)
         result_data = self.__inference_and_postprocess(dataloader, alpha=0.95)
+        return GeomagnesisResult(**result_data)
+    
