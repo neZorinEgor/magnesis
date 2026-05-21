@@ -161,9 +161,8 @@ class GeomagneticNet:
         self,
         geomagnetic_df: pd.DataFrame,
         batch_size: int,
-    ) -> None:
+    ) -> GeomagnesisResult:
         self.__data_validator.validate(geomagnetic_df)
         dataloader = self.__preprocessing(geomagnetic_df, batch_size)
         result_data = self.__inference_and_postprocess(dataloader, alpha=0.95)
         return GeomagnesisResult(**result_data)
-    

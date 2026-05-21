@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "magnesis"
 version = "0.1.1"
-description = "Библиотека для прогнозирование и анализа магнитной активности земли на основе данных "
+description = "Библиотека для прогнозирование и анализа магнитной активности земли на основе данных"
 readme = "README.md"
 authors = [
     {name = "Egor P.Zorin", email = "zorin-ep@mail.ru"}
