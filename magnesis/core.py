@@ -34,8 +34,8 @@ class GeomagneticNet:
         self.__device = device
         self.__model = GeomagneticModelV1(
             lstm_input_size=14,
-            lstm_hidden_size=256,
-            lstm_num_layers=4,
+            lstm_hidden_size=64,
+            lstm_num_layers=2,
             lstm_dropout=0.2,
             dst_attention_heads=2,
             ae_attention_heads=2,
@@ -52,27 +52,41 @@ class GeomagneticNet:
         batch_size: int,
     ) -> DataLoader:
         dataset = geomagnetic_df.copy()
-        if "Unnamed: 0" in dataset.columns:
-            dataset = dataset.drop(columns=["Unnamed: 0"])
-        if "datetime" not in dataset.columns:
-            dataset["datetime"] = pd.to_datetime(
-                dataset["Year"].astype(str)
-                + "-"
-                + dataset["Decimal Day"].astype(str)
-                + " "
-                + dataset["Hour"].astype(str),
-                format="%Y-%j %H",
+        required_columns = [
+            "Bz_GSM",
+            "By_GSM",
+            "Bx_GSE",
+            "Kp",
+            "f10.7",
+            "AL",
+            "AU",
+            "T_proton",
+            "Np_density",
+            "V_plasma",
+            "V_Long_GSE",
+            "V_Lat_GSE",
+            "Dst",
+            "AE",
+        ]
+
+        missing_columns = [
+            col for col in required_columns if col not in dataset.columns
+        ]
+        if missing_columns:
+            raise ValueError(
+                f"В датасете отсутствуют обязательные колонки: {', '.join(missing_columns)}. "
+                f"Ожидаемые колонки: {', '.join(required_columns)}"
             )
-        dataset = dataset.drop(columns=["Year", "Decimal Day", "Hour"])
-        cols = ["datetime"] + [col for col in dataset.columns if col != "datetime"]
-        dataset = dataset[cols]
-        for col in dataset.drop(columns=["datetime"]).columns:
+
+        dataset = dataset[required_columns]
+
+        for col in dataset.columns:
             dataset[col] = dataset[col].replace(FILL_VALIES[col], np.nan)
         features = [i for i in dataset.columns if i != "datetime"]
         # Nan interpolations
         dataset[features] = dataset[features].interpolate(method="pchip")
         # Sampling
-        X, y = dataset.drop(columns=["datetime"]), dataset[["Dst", "AE"]]
+        X, y = dataset[required_columns], dataset[["Dst", "AE"]]
         X_scaled = self.__X_scaler.transform(X)
         y_scaled = self.__y_scaler.transform(y)
         torch_dataset = GeomagneticDataset(
