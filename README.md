@@ -28,6 +28,8 @@ result = model.validate(geomagnesis_data, batch_size=32)
 # визуализация результатов
 result.plot()
 ```
+> [Пример использования](notebooks/usage_example.ipynb)
+
 Результат:
 ![alt text](asserts/image.png)
 
